@@ -30,6 +30,7 @@
 #define HOME 21
 
 const int deadzone = 9;
+const int polldelay = 10;
 
 #include "hidgamepad.h"
 #if CFG_TUD_HID
@@ -145,7 +146,7 @@ void loop()
     Serial.printf("Button State A B X Y R1 L1 R2 L2 R3 L3 \n%d \n", buttons);
     Serial.printf("Hat position: %d \n", hat);
 
-    delay(10); // Small poll delay
+    delay(polldelay); // Small poll delay
 }
 
 #endif
