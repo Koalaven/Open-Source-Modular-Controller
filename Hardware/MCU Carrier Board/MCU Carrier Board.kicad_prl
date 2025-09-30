@@ -20,7 +20,7 @@
       "footprints": true,
       "graphics": true,
       "keepouts": true,
-      "lockedItems": false,
+      "lockedItems": true,
       "otherItems": true,
       "pads": true,
       "text": true,
@@ -50,7 +50,7 @@
       "conflict_shadows",
       "shapes"
     ],
-    "visible_layers": "ffffffff_ffffffff_ffffffff_ffffffff",
+    "visible_layers": "ffffffff_ffffffff_fffffff5_ffffffff",
     "zone_display_mode": 0
   },
   "git": {
@@ -90,14 +90,14 @@
     "col_widths": [
       186,
       171,
-      112,
+      113,
       79,
-      112,
-      112,
-      112,
+      113,
+      113,
+      113,
       83,
-      112,
-      112
+      113,
+      113
     ],
     "custom_group_rules": [],
     "expanded_rows": [],
