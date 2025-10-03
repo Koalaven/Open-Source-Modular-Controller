@@ -8,9 +8,12 @@
 #include "esp_adc/adc_continuous.h"
 #include "esp_log.h"
 #include "tinyusb.h"
+#include "class/hid/hid_device.h"
 #include "sdkconfig.h"
 
-static const char *TAG = "hid_gamepad";
+#define TAG "HID_GAMEPAD"
+
+//static const char *TAG = "hid_gamepad";
 
 #define PIN_LX_ADC_CH    ADC_CHANNEL_0
 #define PIN_LY_ADC_CH    ADC_CHANNEL_1
@@ -32,11 +35,32 @@ static const int btn_pins[] = { 17, 18, 3, 6, 15, 16 };
 /**
  * @brief HID report descriptor
  *
- * In this example we implement Keyboard + Mouse HID device,
- * so we must define both report descriptors
+ * Implement the Gamepad HID device,
+ * we must define the report descriptor
  */
-const uint8_t const hid_report_descriptor[] = {
-    TUD_HID_REPORT_DESC_GAMEPAD(0x04)
+uint8_t hid_report_descriptor[] = {
+    TUD_HID_REPORT_DESC_GAMEPAD(HID_REPORT_ID(HID_ITF_PROTOCOL_NONE))
+};
+
+/**
+ * @brief String descriptor
+ */
+const char* hid_string_descriptor[] = {
+
+    
+};
+
+/**
+ * @brief Configuration descriptor
+ *
+ * This is a simple configuration descriptor that defines 1 configuration and 1 HID interface
+ */
+static const uint8_t hid_configuration_descriptor[] = {
+    // Configuration number, interface count, string index, total length, attribute, power in mA
+    TUD_CONFIG_DESCRIPTOR(1, 1, 0, TUSB_DESC_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
+
+    // Interface number, string index, boot protocol, report descriptor len, EP In address, size & polling interval
+    TUD_HID_DESCRIPTOR(0, 4, false, sizeof(hid_report_descriptor), 0x81, 16, 10),
 };
 
 uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance, uint16_t *length) {
