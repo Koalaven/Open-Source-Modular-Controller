@@ -11,9 +11,9 @@
 #include "class/hid/hid_device.h"
 #include "sdkconfig.h"
 
-#define TAG "HID_GAMEPAD"
+//#define TAG "HID_GAMEPAD"
 
-//static const char *TAG = "hid_gamepad";
+static const char *TAG = "hid_gamepad";
 
 #define PIN_LX_ADC_CH    ADC_CHANNEL_0
 #define PIN_LY_ADC_CH    ADC_CHANNEL_1
@@ -26,11 +26,11 @@ static const int btn_pins[] = { 17, 18, 3, 6, 15, 16 };
 #define NUM_PHYSICAL_BUTTONS (sizeof(btn_pins) / sizeof(btn_pins[0]))
 #define BUTTON_COUNT 32
 #define HID_REPORT_LEN 10
-#define HID_REPORT_ID 0x01
+#define H_REPORT_ID 0x01
 
 /************* TinyUSB descriptors ****************/
 
-#define TUSB_DESC_TOTAL_LEN      (TUD_CONFIG_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
+#define TUSB_DESC_TOTAL_LEN(TUD_CONFIG_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
 
 /**
  * @brief HID report descriptor
@@ -39,7 +39,7 @@ static const int btn_pins[] = { 17, 18, 3, 6, 15, 16 };
  * we must define the report descriptor
  */
 uint8_t hid_report_descriptor[] = {
-    TUD_HID_REPORT_DESC_GAMEPAD(HID_REPORT_ID(HID_ITF_PROTOCOL_NONE))
+    TUD_HID_REPORT_DESC_GAMEPAD(H_REPORT_ID)
 };
 
 /**
@@ -119,10 +119,38 @@ static void adc_init_all(void) {
     adc1_config_channel_atten(PIN_R2_ADC_CH, ADC_ATTEN_DB_11);
 }
 
+
+/****run the main code to start the HID config****/
 void app_main(void) {
     ESP_LOGI(TAG, "Starting HID gamepad (ESP-IDF + TinyUSB)");
     gpio_init();
     adc_init_all();
     tusb_init();
     xTaskCreate(send_hid_report_task, "hid_report_task", 4096, NULL, 5, NULL);
+}
+
+
+// Simple USB HID Gamepad (stub axes + buttons)
+void app_main(void) {
+    // TinyUSB init
+    tinyusb_config_t tusb_cfg = {
+        .device_descriptor = NULL,
+        .string_descriptor = NULL,
+        .string_descriptor_count = 0,
+        .external_phy = false,
+        .configuration_descriptor = NULL,
+    };
+    ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
+
+    tinyusb_hid_config_t hid_cfg = {
+        .iface = TINYUSB_HID_ITF_0,
+        .desc = NULL,
+        .callback = NULL,
+    };
+    ESP_ERROR_CHECK(tinyusb_hid_init(&hid_cfg));
+
+    while (1) {
+        vTaskDelay(pdMS_TO_TICKS(1000));
+        printf("USB HID Gamepad running...\\n");
+    }
 }
