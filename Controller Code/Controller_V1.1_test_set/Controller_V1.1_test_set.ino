@@ -245,7 +245,7 @@ void loop() {
     case 20:
       joystickSweep(2);
       break;
-      case 21:
+    case 21:
       nextState();
       break;
   }
@@ -277,7 +277,7 @@ void nextState() {
   if (state < 20) {
     state++;
     previousMillis = millis();
-  }else{
+  } else {
     previousMillis = millis();
     state = 0;
   }
