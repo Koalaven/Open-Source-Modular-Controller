@@ -9,6 +9,16 @@ int state = 0;
 bool testing = false;
 const int deadzone = 9;
 const int polldelay = 10;
+uint32_t buttons = 0;
+uint8_t hat = 0;  // default center
+String Hats = "";
+String Button = "";
+int ryVal = 0;
+int lyVal = 0;
+int rxVal = 0;
+int lxVal = 0;
+int l2Val = 0;
+int r2Val = 0;
 
 #include "hidgamepad.h"
 #if CFG_TUD_HID
@@ -25,18 +35,19 @@ void loop() {
   // -------------------
   // Loop through inputs
   // -------------------
-  uint32_t buttons = 0;
-  uint8_t hat = 0;  // default center
+  buttons = 0;
+  hat = 0;  // default center
   String Hats = "";
   String Button = "";
-  int ryVal = 0;
-  int lyVal = 0;
-  int rxVal = 0;
-  int lxVal = 0;
-  int l2Val = 0;
-  int r2Val = 0;
+  ryVal = 0;
+  lyVal = 0;
+  rxVal = 0;
+  lxVal = 0;
+  l2Val = 0;
+  r2Val = 0;
   int currentMillis = millis();
   switch (state) {
+    // initial delay 1 sec
     case 0:
       if (currentMillis - previousMillis < 1000) {
         gamepad.buttons(0);
@@ -49,87 +60,123 @@ void loop() {
     //-------------------
     case 1:
       // button B
-      buttons |= (1 << 0);
-      gamepad.buttons(buttons);
-      Button = "B";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 0);
+        gamepad.buttons(buttons);
+        Button = "B";
+      } else {
+        nextState();
+      }
       break;
     case 2:
       // button A
-      buttons |= (1 << 1);
-      gamepad.buttons(buttons);
-      Button = "A";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 1);
+        gamepad.buttons(buttons);
+        Button = "A";
+      } else {
+        nextState();
+      }
       break;
     case 3:
       // button Y
-      buttons |= (1 << 2);
-      gamepad.buttons(buttons);
-      Button = "Y";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 2);
+        gamepad.buttons(buttons);
+        Button = "Y";
+      } else {
+        nextState();
+      }
       break;
     case 4:
       // button X
-      buttons |= (1 << 3);
-      gamepad.buttons(buttons);
-      Button = "X";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 3);
+        gamepad.buttons(buttons);
+        Button = "X";
+      } else {
+        nextState();
+      }
       break;
     case 5:
       // button L1
-      buttons |= (1 << 4);
-      gamepad.buttons(buttons);
-      Button = "L1";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 4);
+        gamepad.buttons(buttons);
+        Button = "L1";
+      } else {
+        nextState();
+      }
       break;
     case 6:
       // button R1
-      buttons |= (1 << 5);
-      gamepad.buttons(buttons);
-      Button = "R1";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 5);
+        gamepad.buttons(buttons);
+        Button = "R1";
+      } else {
+        nextState();
+      }
       break;
     case 7:
       // button L2
-      buttons |= (1 << 6);
-      gamepad.buttons(buttons);
-      Button = "L2";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 6);
+        gamepad.buttons(buttons);
+        Button = "L2";
+      } else {
+        nextState();
+      }
       break;
     case 8:
       // button R2
-      buttons |= (1 << 7);
-      gamepad.buttons(buttons);
-      Button = "R2";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 7);
+        gamepad.buttons(buttons);
+        Button = "R2";
+      } else {
+        nextState();
+      }
       break;
     case 9:
       // start
-      buttons |= (1 << 8);
-      gamepad.buttons(buttons);
-      Button = "Start";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 8);
+        gamepad.buttons(buttons);
+        Button = "Start";
+      } else {
+        nextState();
+      }
       break;
     case 10:
       // select
-      buttons |= (1 << 9);
-      gamepad.buttons(buttons);
-      Button = "Select";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 9);
+        gamepad.buttons(buttons);
+        Button = "Select";
+      } else {
+        nextState();
+      }
       break;
     case 11:
       // button L3
-      buttons |= (1 << 10);
-      gamepad.buttons(buttons);
-      Button = "L3";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 10);
+        gamepad.buttons(buttons);
+        Button = "L3";
+      } else {
+        nextState();
+      }
       break;
     case 12:
       // button R3
-      buttons |= (1 << 11);
-      gamepad.buttons(buttons);
-      Button = "R3";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        buttons |= (1 << 11);
+        gamepad.buttons(buttons);
+        Button = "R3";
+      } else {
+        nextState();
+      }
       break;
     //------------------------
     //----Hat Switch Cycle----
@@ -140,52 +187,66 @@ void loop() {
       buttons |= (1 << 12);
       Hats = "Up";
       gamepad.buttons(buttons);
-      nextState();
+      hatCycle(1, 14);
       break;
     case 14:
       // hat Down
       hat = 3;
       buttons |= (1 << 13);
       Hats = "Down";
-      nextState();
+      gamepad.buttons(buttons);
+      hatCycle(3, 15);
       break;
     case 15:
       // hat left
       hat = 7;
       buttons |= (1 << 14);
       Hats = "Left";
-      nextState();
+      gamepad.buttons(buttons);
+      hatCycle(7, 16);
       break;
     case 16:
       // hat right
       hat = 3;
       buttons |= (1 << 15);
       Hats = "Right";
-      nextState();
+      gamepad.buttons(buttons);
+      hatCycle(3, 17);
       break;
     //-------------------
     //--Special buttons--
     //-------------------
     case 17:
-      // home
-      buttons |= (1 << 16);
-      Button = "Home";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        // home
+        buttons |= (1 << 16);
+        Button = "Home";
+        gamepad.buttons(buttons);
+      } else {
+        nextState();
+      }
       break;
     case 18:
-      // home
-      buttons |= (1 << 17);
-      Button = "Screenshot";
-      nextState();
+      if (currentMillis - previousMillis < 1000) {
+        // Screenshot
+        buttons |= (1 << 17);
+        Button = "Screenshot";
+        gamepad.buttons(buttons);
+      } else {
+        nextState();
+      }
       break;
     //-------------------
     //-----Joysticks-----
     //-------------------
-    case 22:
+    case 19:
       joystickSweep(1);
       break;
-    case 23:
+    case 20:
       joystickSweep(2);
+      break;
+      case 21:
+      nextState();
       break;
   }
 
@@ -213,14 +274,26 @@ void sendgamepad(uint32_t button, int rxVa, int lxVa, int lyVa, int ryVa, int r2
 }
 
 void nextState() {
-  if (state < 25 && previousMillis - millis() < 1000) {
+  if (state < 20) {
     state++;
     previousMillis = millis();
-  } else if (state < 25 && previousMillis - millis() >= 1000) {
+  }else{
+    previousMillis = millis();
     state = 0;
-  } else {
   }
 }
+
+void hatCycle(int direction, int next) {
+  if (millis() - previousMillis < 1000) {
+    gamepad.hat(direction);
+  } else {
+    gamepad.hat(0);
+    buttons = 0;
+    state = next;
+    previousMillis = millis();
+  }
+}
+
 
 void joystickSweep(int stick) {
   unsigned long elapsed = millis() - previousMillis;

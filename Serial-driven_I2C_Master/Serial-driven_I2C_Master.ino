@@ -1,5 +1,5 @@
 /*
-   Raspberry Pi Pico: Serial-driven I2C Master
+   ESP32S3 Nano: Serial-driven I2C Master
    ===========================================
 
    Communicates with ESP32 running PCAL6416A emulator (I2C slave).
@@ -14,6 +14,7 @@
 */
 
 #include <Wire.h>
+#include <Arduino.h>
 
 #define PCAL6416A_ADDR 0x20
 #define SDA_PIN 4
@@ -22,15 +23,14 @@
 void setup() {
   Serial.begin(115200);
   while (!Serial) {}
-  Serial.println("Pico I2C Master Terminal (PCAL6416A emulator)");
+  Serial.println("ESP32 Nano I2C Master Terminal (PCAL6416A emulator)");
   Serial.println("Commands:");
   Serial.println("  R <reg>");
   Serial.println("  W <reg> <val>");
   Serial.println("  E <reg> <n>");
   Serial.println("--------------------------");
 
-  Wire.setSDA(SDA_PIN);
-  Wire.setSCL(SCL_PIN);
+  Wire.setPins(SDA_PIN, SCL_PIN);
   Wire.begin(); // Master mode
 }
 

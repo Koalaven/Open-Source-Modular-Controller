@@ -1,5 +1,5 @@
 /*
-   PCAL6416A Emulator for ESP32 Nano (Arduino version)
+   PCAL6416A Emulator for Pi Pico (Arduino version)
    ---------------------------------------------------
    - Emulates PCAL6416A 16-bit I/O expander
    - I2C slave at address 0x20
@@ -195,7 +195,7 @@ void setup() {
 
   Serial.begin(115200);
   while (!Serial) {}
-  Serial.println("ESP32 Nano PCAL6416A Emulator started (Serial inputs)");
+  Serial.println("Pico PCAL6416A Emulator started (Serial inputs)");
   printHelp();
 }
 
