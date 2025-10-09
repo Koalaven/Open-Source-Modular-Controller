@@ -233,6 +233,7 @@ void loop() {
         Button = "Screenshot";
         gamepad.buttons(buttons);
       } else {
+        gamepad.buttons(0);
         nextState();
       }
       break;
@@ -289,6 +290,7 @@ void hatCycle(int direction, int next) {
   } else {
     gamepad.hat(0);
     buttons = 0;
+    gamepad.buttons(0);
     state = next;
     previousMillis = millis();
   }
