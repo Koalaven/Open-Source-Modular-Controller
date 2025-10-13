@@ -1,8 +1,3 @@
-/**
- * Simple HID gamepad, 32 buttons + 2x 3 axis + 8 position hat
- * author: chegewara
- * library used ESP32TinyUSB
- */
 #define START 35
 #define SELECT 36
 #define HOME 21
@@ -32,9 +27,11 @@
 const int deadzone = 9;
 const int polldelay = 10;
 
-#include "HIDgamepad.h"
+#include"USB.h"
+#include "USBHIDGamepad.h"
+
 #if CFG_TUD_HID
-HIDgamepad gamepad;
+USBHIDGamepad gamepad;
 
 void setup() {
   pinMode(PIN_Ry, INPUT);
@@ -130,14 +127,14 @@ void loop() {
   // Send state to HID
   // -------------------
   gamepad.send(
-    buttons,   // 32 buttons bitmask
     lxVal,    // LX
     lyVal,    // LY
     l2Val,    // L2 (treated as analog axis)
     rxVal,    // RX
     ryVal,    // RY
     r2Val,    // R2 (treated as analog axis)
-    hat       // D-pad hat
+    hat,      // D-pad hat
+    buttons   // 32 buttons bitmask
   );
   Serial.println("Joystick position");
   Serial.printf("Left y: %d x: %d \nRight y: %d x: %d \n", lyVal, lxVal, ryVal, rxVal);

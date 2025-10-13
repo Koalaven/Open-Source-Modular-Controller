@@ -32,9 +32,9 @@
 const int deadzone = 9;
 const int polldelay = 10;
 
-#include "HIDgamepad.h"
+#include "gamepad1.h"
 #if CFG_TUD_HID
-HIDgamepad gamepad;
+gamepad1 gamepad;
 
 void setup() {
   pinMode(PIN_Ry, INPUT);
@@ -129,8 +129,8 @@ void loop() {
   // -------------------
   // Send state to HID
   // -------------------
-  gamepad.send(
-    buttons,   // 32 buttons bitmask
+  gamepad.sendAll(
+    buttons,  // 32 buttons bitmask
     lxVal,    // LX
     lyVal,    // LY
     l2Val,    // L2 (treated as analog axis)
