@@ -1,0 +1,6 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "MCU Carrier board")(type "KiCad")(uri "${KIPRJMOD}/MCU Carrier board.pretty")(options "")(descr ""))
+  (lib (name "MCU_Controller")(type "KiCad")(uri "${KIPRJMOD}/MCU_Controller.pretty")(options "")(descr ""))
+  (lib (name "MCU_Carrier_Board")(type "KiCad")(uri "${KIPRJMOD}/MCU_Carrier_Board.pretty")(options "")(descr ""))
+)
