@@ -1,10 +1,9 @@
-#include "Gamepad_config.h"
-
 const int deadzone = 9;
-const int polldelay = 10;
+const int polldelay = 500;
 
-#include"USB.h"
+#include "USB.h"
 #include "USBHIDGamepad.h"
+#include "Gamepad_config.h"
 
 #if CFG_TUD_HID
 USBHIDGamepad gamepad;
@@ -37,6 +36,7 @@ void setup() {
   pinMode(PIN_HOME, INPUT_PULLUP);
 
   Serial.begin(115200);
+  delay(10);
   gamepad.begin();
 }
 
