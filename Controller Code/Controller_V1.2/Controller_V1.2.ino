@@ -1,5 +1,5 @@
 const int deadzone = 9;
-const int polldelay = 500;
+const int polldelay = 10;
 
 #include "USB.h"
 #include "USBHIDGamepad.h"
