@@ -37,7 +37,7 @@ The repository is organized as follows:
 - Repositionable input layout using multiple receiver boards
 - ESP32‑S3 native USB HID support
 - Open‑source hardware and firmware
-- 3D‑printable ergonomic controller shell
+- Premade 3D‑printable ergonomic controller shell
 
 ## System Architecture
 
@@ -56,7 +56,7 @@ A full BOM including the ESP32‑S3 boards, connector sets, resistors, capacitor
 ### Software
 - Arduino IDE
 - KiCad
-- OnShape (frame design)
+- Fusion (frame design)
 - GitHub Desktop
 - Cura slicer
 
