@@ -21,14 +21,21 @@
 
 ## 3. 3D Print the Shell
 
-Print:
+For Our Shells:
+1. Body shells: [link](/Hardware/Shell/OSMC)
+    - The full casing can be printed from the .step file
+    - Individual case sections can be printed from the .stl files
+2. Module shells: [link](/Hardware/Module%STLs)
+    - Standard configurations require **7** modules: 1 Master, 2 Bumpers, 2 Joysticks, 2 Buttons
+    - Each **Master** modules requires: 1 Master top casing, 1 Master bottom casing, 3 Master buttons
+    - Each **Joystick** module requires: 1 Joystick top casing, 1 Joystick bottom casing
+    - Each **Bumper** module requires 1 Bumper body casing and 2 Bumper caps
+    - Each **Button** module requires: 1 Button top casing, 1 Button Bottom casing, 4 non-Master buttons
+        - For push buttons, options include the normal button caps ([link](/Hardware/Module%STLs/OSMC_Module_Buttons_Button)) and the taller button caps ([link](/Hardware/Module%STLs/Button%Cap%Taller.stl))
+        - For membrane buttons, print the SMD caps ([link](/Hardware/Module%STLs/Button%Cap$SMD.stl))
+    
+For **Custom** shell designs we recommend following this design process: [link](/Documents/Custom%Shell%Recommendations.md)
 
-* Bottom shell
-* Top shell
-* Button/joystick module shells
-* Any optional accessories
-
-Use STEP files provided in the repository: [link](/Hardware/Shell/OSMC%20Assembly.step).
 
 ---
 
@@ -122,13 +129,18 @@ Most boards in this build were hand-soldered.
 
 ## 7. Assemble the Controller Shell
 
-1. Place receiver boards in bottom shell.
+1. Place Receiver boards in the main shell.
 2. Mark screw hole locations.
-3. Install **M3 heat-set inserts** at marked points.
-4. Screw receiver boards into place.
-5. Insert button and joystick modules.
-6. Mount the carrier board in the center.
-7. Attach the top shell, ensuring input alignment.
+4. Install **M3 heat-set inserts** at marked points.
+5. Repeat steps **1-3** instead with the Bumper modules
+6. Connect the Bumper modules to the back of the Receiver board using the **JST** connectors
+7. Screw Receiver board and Bumper modules into place.
+8. Insert the **ESP-32** into the pin connectors on the bottom of the Receiver board
+9. Set Button, Joystick, and Master modules on their respective pogo pins following the screenprint's outline
+10. Place the shell's top plate over the modules, while verifying their alignment
+11. Slide the shell's bottom plate into place
+
+Note: To rearrange the top modules, carefully push up on the tab of the top plate, and repeat steps 8-9 with the new configuration
 
 ---
 
